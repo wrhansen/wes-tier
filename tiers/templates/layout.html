@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Wes Tier</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/site.js' %}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#333333',
+                        bg2: '#444444',
+                        bg3: '#000000',
+                        tier1: 'rgb(255, 127, 127)',
+                        tier2: 'rgb(255, 191, 127)',
+                        tier3: 'rgb(255, 223, 127)',
+                        tier4: 'rgb(255, 255, 127)',
+                        tier5: 'rgb(191, 255, 127)',
+                        tier6: 'rgb(127, 255, 127)',
+                        tier7: 'rgb(127, 255, 255)',
+                        tier8: 'rgb(127, 191, 255)',
+                        tier9: 'rgb(127, 127, 255)',
+                        tier10: 'rgb(255, 127, 255)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-bg p-16" hx-boost="true" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    {% block content %}
+    {% endblock content %}
+    <script src="{% static 'js/htmx.js' %}" defer></script>
+</body>
+</html>
