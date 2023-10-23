@@ -50,7 +50,7 @@ class TierItem(models.Model):
     )
 
     def __str__(self):
-        return f"name={self.name} image={self.image.url} tierlist={self.tierlist_id} tierrow={self.tierrow_id}"
+        return f"id={self.id} name={self.name} image={self.image.url} tierlist={self.tierlist_id} tierrow={self.tierrow_id}"
 
     def save(self, *args, **kwargs):
         if self.tierrow:

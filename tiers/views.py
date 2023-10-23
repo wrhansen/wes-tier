@@ -81,3 +81,8 @@ def dropped(request):
         {"tier_item": tier_item},
         status=201,
     )
+
+
+def delete_tier_item(request, tier_item_id):
+    TierItem.objects.get(id=tier_item_id).delete()
+    return HttpResponse(status=200)
