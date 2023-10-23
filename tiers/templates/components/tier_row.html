@@ -1,6 +1,6 @@
 {% load static %}
 <form>
-<div id="tr-{{ tier_row.id }}" class="flex gap-4" ondragover="allowDrop(event)" hx-trigger="drop" hx-post="/dropped" ondrop="onDrop(event, this);" hx-swap="beforeend" hx-target="#tr-inner-{{ tier_row.id }}">
+<div id="tr-{{ tier_row.id }}" class="flex gap-4" ondragover="allowDrop(event)" hx-trigger="drop" hx-post="/dropped" ondrop="onDrop(event);" hx-swap="beforeend" hx-target="#tr-inner-{{ tier_row.id }}">
     <input type="hidden" name="tier_row_id" value="tr-{{ tier_row.id }}"/>
 
     <div class="flex flex-none flex-1 flex-col rounded bg-tier{{ index }} h-16 w-16 justify-center items-center">

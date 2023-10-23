@@ -8,7 +8,6 @@ function onDrag(ev) {
 
 function onDrop(ev) {
     data = ev.dataTransfer.getData("text");
-    console.log("DATA: " + data);
     ev.target.setAttribute("hx-vals", JSON.stringify({
         "tier_item_id": data
     }));
