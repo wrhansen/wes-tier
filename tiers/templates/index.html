@@ -1,23 +1,13 @@
 {% extends 'layout.html' %}
 {% load static %}
+
 {% block content %}
-<div class="p-8 max-w-5xl rounded-lg bg-bg2 shadow-2xl content-center">
-    <h1 class="text-4xl font-extrabold leading-none tracking-tight text-gray-400 justify-center flex items-center bg-bg">{{ tierlist.name }}</h1>
-    <h2 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-400 justify-center flex items-center bg-bg">{{ tierlist.description }}</h2>
-    {% for tier_row in tierlist.rows.all %}
-        {% include "components/tier_row.html" with index=forloop.counter tier_row=tier_row %}
-    {% endfor %}
-</div>
 
-<div class="max-w-5xl flex p-8">
-    <div id="tier-items-base" class="p-8 rounded-lg bg-bg3 flex flex-wrap gap-2 grow" ondrop="onDrop(event);" ondragover="allowDrop(event)" hx-trigger="drop" hx-post="/dropped"  hx-swap="beforeend">
-        {% include "components/tier_items_base.html" with tier_items=tier_items %}
-    </div>
-    <form id="upload-image">
-        <div class="flex flex-col">
-            {{ form.as_div }}
-        </div>
-    </form>
-</div>
-
+<ul>
+{% for tierlist in tierlists %}
+    <li data-tierlist-id={{ tierlist.id }}>
+        <a href="{% url 'tierlist-details' tierlist.id %}">{{ tierlist.name }}: {{ tierlist.description }}</a>
+    </li>
+{% endfor %}
+</ul>
 {% endblock %}

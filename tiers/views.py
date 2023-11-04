@@ -8,11 +8,22 @@ from .models import TierItem, TierList, TierRow
 
 @require_GET
 def index(request):
-    tierlist = TierList.objects.create_list_and_rows()
-    form = TierItemForm()
     return render(
         request,
         "index.html",
+        {
+            "tierlists": TierList.objects.all(),
+        },
+    )
+
+
+@require_GET
+def details(request, pk):
+    tierlist = TierList.objects.get(id=pk)
+    form = TierItemForm()
+    return render(
+        request,
+        "details.html",
         {
             "form": form,
             "tier_items": TierItem.objects.filter(
@@ -24,10 +35,10 @@ def index(request):
 
 
 @require_POST
-def upload_image(request):
+def upload_image(request, pk):
     form = TierItemForm(request.POST, request.FILES)
     if form.is_valid():
-        tierlist = TierList.objects.get(id=1)
+        tierlist = TierList.objects.get(id=pk)
         form.instance.tierlist = tierlist
         form.save()
     response = render(
@@ -41,7 +52,6 @@ def upload_image(request):
 
 @require_POST
 def dropped(request):
-    print(request.POST)
     try:
         tier_row_id = int(request.POST["tier_row_id"].lstrip("tr-"))
     except Exception:
@@ -78,6 +88,6 @@ def dropped(request):
     )
 
 
-def delete_tier_item(request, tier_item_id):
-    TierItem.objects.get(id=tier_item_id).delete()
+def delete_tier_item(request, pk):
+    TierItem.objects.get(id=pk).delete()
     return HttpResponse(status=200)
