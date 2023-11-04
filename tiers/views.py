@@ -40,11 +40,6 @@ def upload_image(request):
 
 
 @require_POST
-def move_to_tier(request, from_tier, to_tier):
-    pass
-
-
-@require_POST
 def dropped(request):
     print(request.POST)
     try:

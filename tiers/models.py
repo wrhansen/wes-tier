@@ -8,8 +8,8 @@ class TierListManager(models.Manager):
         tierlist, _ = self.get_or_create(
             id=1,
             defaults={
-                "name": "First Tierist",
-                "description": ":Testing out the first tierlist.",
+                "name": "First Tierlist",
+                "description": "Testing out the first tierlist.",
             },
         )
 
