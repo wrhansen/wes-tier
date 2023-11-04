@@ -1,3 +1,4 @@
+import glob
 import multiprocessing
 import os
 
@@ -11,3 +12,8 @@ worker_connections = 10000
 pythonpath = BASE_DIR
 chdir = BASE_DIR
 reload = True
+reload_extra_files = [
+    *glob.glob(
+        os.path.join(BASE_DIR, "tiers", "templates", "**", "*.html"), recursive=True
+    ),
+]
