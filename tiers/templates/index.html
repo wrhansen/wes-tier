@@ -3,11 +3,29 @@
 
 {% block content %}
 
-<ul>
-{% for tierlist in tierlists %}
-    <li data-tierlist-id={{ tierlist.id }}>
-        <a href="{% url 'tierlist-details' tierlist.id %}">{{ tierlist.name }}: {{ tierlist.description }}</a>
-    </li>
-{% endfor %}
-</ul>
+<div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-2xl sm:p-8 dark:bg-bg2 dark:border-gray-700">
+    <div class="flex items-center justify-between mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Tier Lists</h5>
+    </div>
+    <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+            {% for tierlist in tierlists %}
+                <li data-tierlist-id={{ tierlist.id }} class="py-3 sm:py-4 px-4 hover:bg-bg rounded-full">
+                    <a href="{% url 'tierlist-details' tierlist.id %}">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-1 min-w-0 text-gray-900 dark:text-white">
+                                {{ tierlist.name }}
+                            </div>
+                            <div class="inline-flex items-center text-sm font-semibold ">
+                                {{ tierlist.description }}
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
 {% endblock %}
