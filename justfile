@@ -5,3 +5,6 @@ rebuild:
 
 shell:
     docker compose run --rm web bash
+
+clean:
+    docker compose run --rm web ./manage.py flush --no-input
