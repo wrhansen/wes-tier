@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 # 3rd party apps
-# INSTALLED_APPS += ["django_htmx"]
+INSTALLED_APPS += ["fontawesomefree"]
 
 # My Apps
 INSTALLED_APPS += ["tiers"]

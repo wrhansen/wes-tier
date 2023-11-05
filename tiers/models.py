@@ -1,25 +1,21 @@
 from django.db import models
 
-DEFAULT_TIERLIST_ROW_NAMES = ["S", "A", "B", "C", "D", "E", "F", "G", "H", "I"]
+DEFAULT_TIERLIST_ROW_NAMES = ["S", "A", "B", "C"]
+MAX_TIERLIST_ROW_NAMES = ["S", "A", "B", "C", "D", "E", "F", "G", "H", "I"]
 
 
 class TierListManager(models.Manager):
-    def create_list_and_rows(self):
-        tierlist, _ = self.get_or_create(
-            id=1,
-            defaults={
-                "name": "First Tierlist",
-                "description": "Testing out the first tierlist.",
-            },
+    def create_default_list_and_rows(self, name):
+        tierlist = self.create(
+            name=name,
         )
 
-        if not tierlist.rows.all():
-            for order, row_name in enumerate(DEFAULT_TIERLIST_ROW_NAMES):
-                TierRow.objects.bulk_create(
-                    [
-                        TierRow(name=row_name, order=order, tierlist=tierlist),
-                    ]
-                )
+        for order, row_name in enumerate(DEFAULT_TIERLIST_ROW_NAMES):
+            TierRow.objects.bulk_create(
+                [
+                    TierRow(name=row_name, order=order, tierlist=tierlist),
+                ]
+            )
         return tierlist
 
 

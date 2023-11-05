@@ -20,7 +20,7 @@ def index(request):
 @require_GET
 def details(request, pk):
     tierlist = TierList.objects.get(id=pk)
-    form = TierItemForm()
+    form = TierItemForm(tierlist_id=tierlist.id)
     return render(
         request,
         "details.html",
@@ -36,7 +36,7 @@ def details(request, pk):
 
 @require_POST
 def upload_image(request, pk):
-    form = TierItemForm(request.POST, request.FILES)
+    form = TierItemForm(request.POST, request.FILES, tierlist_id=pk)
     if form.is_valid():
         tierlist = TierList.objects.get(id=pk)
         form.instance.tierlist = tierlist
@@ -91,3 +91,20 @@ def dropped(request):
 def delete_tier_item(request, pk):
     TierItem.objects.get(id=pk).delete()
     return HttpResponse(status=200)
+
+
+@require_POST
+def create_default_tierlist(request):
+    name = request.POST.get("name")
+    errors = {}
+    tierlist = None
+    if not name:
+        errors["name"] = "Must provide name"
+    else:
+        tierlist = TierList.objects.create_default_list_and_rows(name)
+    return render(
+        request,
+        "components/tierlist-li.html",
+        {"tierlist": tierlist, "errors": errors},
+        status=201 if not errors else 400,
+    )

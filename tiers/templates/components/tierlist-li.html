@@ -1,0 +1,16 @@
+{% if errors %}
+<span class="error">{{ errors.name }}</span>
+{% else %}
+    <li data-tierlist-id={{ tierlist.id }} class="py-3 sm:py-4 px-4 hover:bg-bg rounded-full">
+        <a href="{% url 'tierlist-details' tierlist.id %}">
+            <div class="flex items-center space-x-4">
+                <div class="flex-1 min-w-0 text-white">
+                    {{ tierlist.name }}
+                </div>
+                <div class="inline-flex items-center text-sm font-semibold text-gray-500">
+                    {{ tierlist.description }}
+                </div>
+            </div>
+        </a>
+    </li>
+{% endif %}

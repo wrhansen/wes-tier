@@ -5,26 +5,26 @@
 
 <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-2xl sm:p-8 dark:bg-bg2 dark:border-gray-700">
     <div class="flex items-center justify-between mb-4">
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Tier Lists</h5>
+        <h2 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Tier Lists</h2>
     </div>
     <div class="flow-root">
-        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+        <ul id="tierlist-list" role="list">
             {% for tierlist in tierlists %}
-                <li data-tierlist-id={{ tierlist.id }} class="py-3 sm:py-4 px-4 hover:bg-bg rounded-full">
-                    <a href="{% url 'tierlist-details' tierlist.id %}">
-                        <div class="flex items-center space-x-4">
-                            <div class="flex-1 min-w-0 text-gray-900 dark:text-white">
-                                {{ tierlist.name }}
-                            </div>
-                            <div class="inline-flex items-center text-sm font-semibold ">
-                                {{ tierlist.description }}
-                            </div>
-                        </div>
-                    </a>
-                </li>
+                {% include 'components/tierlist-li.html' with tierlist=tierlist %}
             {% endfor %}
         </ul>
     </div>
+
+    <hr class="h-px my-2 bg-gray-200 border-1 dark:bg-gray-600">
+    <form hx-post="{% url 'tierlist-create-default' %}" hx-target="#tierlist-list" hx-swap="beforeend" hx-on::after-request="this.reset()">
+        <div class="flex">
+            <input type="text" id="tierlist-name" name="name" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Create new...">
+
+            <button class="flex-none ml-1 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-xl rounded-xl text-md p-2 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type="submit">
+                <i class="fa-solid fa-circle-plus"></i>
+            </button>
+        </div>
+    </form>
 </div>
 
 

@@ -24,7 +24,8 @@ class TierItemForm(forms.ModelForm):
         model = TierItem
         fields = ["image"]
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, tierlist_id=None, **kwargs):
         super().__init__(*args, **kwargs)
         for key, field in self.fields.items():
             field.label = ""  # To remove the widget labels
+        self.fields["image"].widget.attrs["hx-post"] = f"/upload-image/{tierlist_id}"
